@@ -36,11 +36,7 @@
             <div id="listings" class="well"></div>
             
             <script>
-                //var storage = Rhaboo.persistent('mpgTracker');
-            </script>
-            
-            <script>
-                document.getElementById("save").onclick = function()
+                function setListings()
                 {
                     if (localStorage.myListings)
                     {
@@ -50,6 +46,29 @@
                     {
                         myListings = [];
                     }
+                    
+                    if (myListings.length > 0)
+                    {
+                        for each(listing in myListings)
+                        {
+                            var listings = document.getElementById("listings");
+                            listings.innerHTML += "<p>Date: " + date + "<br>Odometer: " + document.getElementById("odo").value + "<br>Price/Gallon: " + document.getElementById("ppg").value + "<br>Total: " + document.getElementById("total").value + "</p>";
+                        }
+                    }
+                }
+                
+                document.getElementById("save").onclick = function()
+                {
+                    /*
+                    if (localStorage.myListings)
+                    {
+                        myListings = JSON.parse(localStorage.myListings)
+                    }
+                    else
+                    {
+                        myListings = [];
+                    }
+                    */
                     
                     date = new Date();
                     
@@ -67,6 +86,8 @@
                     
                     localStorage.myListings = JSON.stringify(myListings);
                 };
+                
+                window.onload = setListings;
             </script>
             
         </div>
