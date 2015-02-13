@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+        <link href="style.css" rel="stylesheet">
+
+    </head>
+    <body>
+        <div class="container">
+            <h1>MPG Tracker</h1>
+            
+            <div id="new-entry">
+                <form>
+                    <fieldset>
+                        <legend>New Entry</legend>
+                        <label for="odo">Odometer:</label>
+                        <input type="text" id="odo" name="odo">
+
+                        <br/>
+
+                        <label for="ppg">Price/Gallon:</label>
+                        <input type="text" id="ppg" name="ppg"> 
+
+                        <br/>
+
+                        <label for="total">Total Gallons:</label>
+                        <input type="text" id="total" name="total"> 
+
+                        <br/>
+
+                        <input type="button" id="save" class="btn btn-primary" value="Save" />
+                    </fieldset>
+                </form>
+            </div>
+            
+            <div id="listings" class="well"></div>
+            
+            <script>
+                //var storage = Rhaboo.persistent('mpgTracker');
+            </script>
+            
+            <script>
+                document.getElementById("save").onclick = function()
+                {
+                    if (localStorage.myListings)
+                    {
+                        myListings = JSON.parse(localStorage.myListings)
+                    }
+                    else
+                    {
+                        myListings = [];
+                    }
+                    
+                    date = new Date();
+                    
+                    var entry = {
+                        date:date,
+                        odo:document.getElementById("odo").value, 
+                        ppg:document.getElementById("ppg").value, 
+                        total:document.getElementById("total").value
+                    };
+                    
+                    myListings.push(entry);
+                    
+                    var listings = document.getElementById("listings");
+                    listings.innerHTML += "<p>Date: " + date + "<br>Odometer: " + document.getElementById("odo").value + "<br>Price/Gallon: " + document.getElementById("ppg").value + "<br>Total: " + document.getElementById("total").value + "</p>";
+                    
+                    localStorage.myListings = JSON.stringify(myListings);
+                };
+            </script>
+            
+        </div>
+    </body>
+    
+    <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    
+</html>
