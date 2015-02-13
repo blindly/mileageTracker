@@ -3,9 +3,9 @@
     <head>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
         <link href="style.css" rel="stylesheet">
-
+        
     </head>
-    <body>
+    <body onload="setListings();">
         <div class="container">
             <h1>MPG Tracker</h1>
             
@@ -33,67 +33,13 @@
                 </form>
             </div>
             
-            <div id="listings" class="well"></div>
-            
-            <script>
-                function setListings()
-                {
-                    if (localStorage.myListings)
-                    {
-                        myListings = JSON.parse(localStorage.myListings)
-                    }
-                    else
-                    {
-                        myListings = [];
-                    }
-                    
-                    if (myListings.length > 0)
-                    {
-                        for each(listing in myListings)
-                        {
-                            var listings = document.getElementById("listings");
-                            listings.innerHTML += "<p>Date: " + date + "<br>Odometer: " + document.getElementById("odo").value + "<br>Price/Gallon: " + document.getElementById("ppg").value + "<br>Total: " + document.getElementById("total").value + "</p>";
-                        }
-                    }
-                }
-                
-                document.getElementById("save").onclick = function()
-                {
-                    /*
-                    if (localStorage.myListings)
-                    {
-                        myListings = JSON.parse(localStorage.myListings)
-                    }
-                    else
-                    {
-                        myListings = [];
-                    }
-                    */
-                    
-                    date = new Date();
-                    
-                    var entry = {
-                        date:date,
-                        odo:document.getElementById("odo").value, 
-                        ppg:document.getElementById("ppg").value, 
-                        total:document.getElementById("total").value
-                    };
-                    
-                    myListings.push(entry);
-                    
-                    var listings = document.getElementById("listings");
-                    listings.innerHTML += "<p>Date: " + date + "<br>Odometer: " + document.getElementById("odo").value + "<br>Price/Gallon: " + document.getElementById("ppg").value + "<br>Total: " + document.getElementById("total").value + "</p>";
-                    
-                    localStorage.myListings = JSON.stringify(myListings);
-                };
-                
-                window.onload = setListings;
-            </script>
-            
+            <div id="listings" class="well"></div>            
         </div>
     </body>
     
     <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    
+    <script src="mpgTracker.js"></script>
     
 </html>
